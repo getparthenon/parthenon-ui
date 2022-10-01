@@ -1,0 +1,28 @@
+name: PHP test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  repository_dispatch:
+      types: [ push ]
+
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install yarn
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+
+      - name: Run vitest
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: test
